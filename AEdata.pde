@@ -4,8 +4,8 @@ void AEdataInit() {
   data.add("Adobe After Effects 8.0 Keyframe Data");
   data.add("\r");
   data.add("\t"+"Units Per Second"+"\t"+fps);
-  data.add("\t"+"Source Width"+"\t"+sW);
-  data.add("\t"+"Source Height"+"\t"+sH);
+  data.add("\t"+"Source Width"+"\t"+dW);
+  data.add("\t"+"Source Height"+"\t"+dH);
   data.add("\t"+"Source Pixel Aspect Ratio"+"\t"+"1");
   data.add("\t"+"Comp Pixel Aspect Ratio"+"\t"+"1");
   data.add("\r");
