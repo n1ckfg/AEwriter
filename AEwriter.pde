@@ -1,4 +1,6 @@
 PVector p, v;
+float vMax = 10;
+
 Data data;
 int counter=0;
 int counterMax = 300;
@@ -23,29 +25,38 @@ void setup() {
   size(sW, sH);
   frameRate(fps);
   p = new PVector(sW/2, sH/2);
-  v = new PVector(10, 10);
+  v = new PVector(vMax, vMax);
   AEdataInit();
   AEdataPosInit();
 }
 
 void draw() {
-  if (counter<counterMax) {
-    background(0);
-    strokeWeight(20);
-    stroke(255);
+  background(0);
+  strokeWeight(20);
+  stroke(255);
+
+  if (mousePressed) {
+    p.x += (mouseX - p.x)/vMax;
+    p.y += (mouseY - p.y)/vMax;
+  } 
+  else {
+    if (p.x<0||p.x>sW) {
+      v.x *= -1;
+    }
+    if (p.y<0||p.y>sH) {
+      v.y *= -1;
+    }
     p.add(v);
-    if(p.x<0||p.x>sW){
-    v.x *= -1;
-    };
-    if(p.y<0||p.y>sH){
-    v.y *= -1;
-    };
-    point(p.x, p.y);
-    
+  }
+
+  point(p.x, p.y);
+
+  if (counter<counterMax) {
     AEdataPosWrite();
     counter++;
     println(counter + " / " + counterMax);
-  } else {
+  } 
+  else {
     AEdataSave();   
     exit();
   }
