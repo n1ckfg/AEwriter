@@ -1,30 +1,15 @@
-//position
-void AEdataPosInit() {
-  data.add("Transform" + "\t" + "Position");
-  data.add("\t" + "Frame" + "\t" + "X pixels" + "\t" + "Y pixels");
-}
-
 void AEdataPosWrite() {
-  data.add("\t" + counter  
-    + "\t" + (p.x * (dW/sW))
-    + "\t" + (p.y * (dH/sH))
-    ); //gets to the child we need //gets to the child we need
-}
+  for (int i=0;i<numParticles;i++) {
+    data.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
+    data.add("\t" + "solid.motionBlur = true;" + "\r");
+    data.add("\r");
+    data.add("\t" + "var p = solid.property(\"position\");" + "\r");
+    data.add("\r");
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-//puppet pin
-int pinNum = 1;
-
-void AEdataPuppetInit() {
-  data.add("Effects" + "\t" + "Puppet #2" + "\t" + "arap #3" + "\t" + "Mesh" + "\t" + "Mesh #1" + "\t" + "Deform" + "\t" + "Pin #" + pinNum + "\t" + "Position");
-  data.add("\t" + "Frame" + "\t" + "X pixels" + "\t" + "Y pixels");
-}
-
-void AEdataPuppetWrite() {
-  data.add("\t" + counter  
-    + "\t" + (p.x * (dW/sW))
-    + "\t" + (p.y * (dH/sH))
-    ); //gets to the child we need //gets to the child we need
+    for (int j=0;j<counterMax;j++) {
+      data.add("\t\t" + "p.setValueAtTime(" + ((float(j)/float(counterMax)) * (float(counterMax)/float(fps))) + ", [ " + particle[i].path[j].x + ", " + particle[i].path[j].y + "]);" + "\r");
+    }
+    
+  }
 }
 
