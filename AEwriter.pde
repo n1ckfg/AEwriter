@@ -1,6 +1,8 @@
+import processing.opengl.*;
+
 Data data;
 int counter=0;
-int counterMax = 5 * 24;
+int counterMax = 15 * 24;
 
 //this sketch
 int sW = 640;
@@ -17,22 +19,22 @@ String aeFilePath = "";
 String aeFileType = "jsx";
 
 int numParticles = 10;
-Particle[] particle = new Particle[numParticles];
+Boid[] particle = new Boid[numParticles];
 
 void setup() {
-  size(sW, sH);
+  size(sW, sH, OPENGL);
   frameRate(fps);
   for(int i=0;i<numParticles;i++){
-    particle[i] = new Particle();
+    particle[i] = new Boid(new PVector(random(sW),random(sH)),10.0,0.5); //orig 4.0, 0.1
   }
-  AEdataInit();
+  AEkeysBegin();
 }
 
 void draw() {
   background(0);
 
   for(int i=0;i<numParticles;i++){
-    particle[i].update();
+    particle[i].run();
   }
 
   if (counter<counterMax) {
@@ -40,8 +42,8 @@ void draw() {
     println(counter + " / " + counterMax);
   } 
   else {
-    AEdataPosWrite();
-    AEdataSave();   
+    AEkeysMain();
+    AEkeysEnd();   
     exit();
   }
 }
