@@ -1,21 +1,44 @@
 void AEkeysMain() {
   for (int i=0;i<numParticles;i++) {
     data.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
-    data.add("\t" + "solid.motionBlur = true;" + "\r");
-    data.add("\t" + "var myEffect = solid.property(\"Effects\").addProperty(\"Fast Blur\")(\"Blurriness\").setValue(61);");
+    if(motionBlur){
+      data.add("\t" + "solid.motionBlur = true;" + "\r");
+    }
+    if(applyEffects){
+      AEeffects();
+    }
     data.add("\r");
     data.add("\t" + "var p = solid.property(\"position\");" + "\r");
     data.add("\t" + "var r = solid.property(\"rotation\");" + "\r");
     data.add("\r");
 
     for (int j=0;j<counterMax;j++) {
-      data.add("\t\t" + "p.setValueAtTime(" + ((float(j)/float(counterMax)) * (float(counterMax)/float(fps))) + ", [ " + particle[i].AEpath[j].x + ", " + particle[i].AEpath[j].y + "]);" + "\r");
-      data.add("\t\t" + "r.setValueAtTime(" + ((float(j)/float(counterMax)) * (float(counterMax)/float(fps))) + ", " + particle[i].AErot[j] +");" + "\r");
+      if(applySmoothing){  //this doesn't really work right now
+      if(j==0||j==counterMax-1){
+        AEkeyPos(i,j);
+      }else{
+         if(hitDetect(particle[i].AEpath[j].x,particle[i].AEpath[j].y,1,1,particle[i].AEpath[j-1].x,particle[i].AEpath[j-1].x,smoothNum,smoothNum)){ 
+           AEkeyPos(i,j);
+         }
+      }
+    }else{
+      AEkeyPos(i,j);
     }
-    
   }
 }
+}
 
+void AEkeyPos(int spriteNum, int frameNum){
+      data.add("\t\t" + "p.setValueAtTime(" + ((float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps))) + ", [ " + particle[spriteNum].AEpath[frameNum].x + ", " + particle[spriteNum].AEpath[frameNum].y + "]);" + "\r");
+}
+
+void AEkeyRot(int spriteNum, int frameNum){
+      data.add("\t\t" + "r.setValueAtTime(" + ((float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps))) + ", " + particle[spriteNum].AErot[frameNum] +");" + "\r");
+}
+
+void AEeffects(){
+     data.add("\t" + "var myEffect = solid.property(\"Effects\").addProperty(\"Fast Blur\")(\"Blurriness\").setValue(61);");
+}
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -46,4 +69,17 @@ void AEkeysEnd() {
   data.add("\t" + "app.endUndoGroup();" + "\r");
   data.add("}  //end script" + "\r");
   data.endSave("data/"+ aeFilePath + "/" + aeFileName + "." + aeFileType);
+}
+
+boolean hitDetect(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
+  w1 /= 2;
+  h1 /= 2;
+  w2 /= 2;
+  h2 /= 2; 
+  if(x1 + w1 >= x2 - w2 && x1 - w1 <= x2 + w2 && y1 + h1 >= y2 - h2 && y1 - h1 <= y2 + h2) {
+    return true;
+  } 
+  else {
+    return false;
+  }
 }

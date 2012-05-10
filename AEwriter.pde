@@ -1,8 +1,14 @@
 import processing.opengl.*;
 
-Data data;
-int counter=0;
-int counterMax = 15 * 24;
+//**************************
+int fps = 24;
+float durationFrames = 5 * fps;
+int numParticles = 10;
+boolean motionBlur = true;
+boolean applyEffects = false;
+boolean applySmoothing = false; //this doesn't really work right now
+float smoothNum = 250;
+//**************************
 
 //this sketch
 int sW = 640;
@@ -12,13 +18,13 @@ int sH = 360;
 int dW = 1920;
 int dH = 1080;
 
-int fps = 24;
-
 String aeFileName = "AEscript";
 String aeFilePath = "";
 String aeFileType = "jsx";
 
-int numParticles = 10;
+Data data;
+int counter=0;
+int counterMax = int(durationFrames);
 Boid[] particle = new Boid[numParticles];
 
 void setup() {
