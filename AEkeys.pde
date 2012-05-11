@@ -13,23 +13,31 @@ void AEkeysMain() {
     data.add("\r");
 
     for (int j=0;j<counterMax;j++) {
-      if(applySmoothing){  //this doesn't really work right now
-      if(j==0||j==counterMax-1){
-        AEkeyPos(i,j);
-      }else{
-         if(hitDetect(particle[i].AEpath[j].x,particle[i].AEpath[j].y,1,1,particle[i].AEpath[j-1].x,particle[i].AEpath[j-1].x,smoothNum,smoothNum)){ 
-           AEkeyPos(i,j);
-         }
-      }
-    }else{
       AEkeyPos(i,j);
     }
-  }
 }
 }
 
 void AEkeyPos(int spriteNum, int frameNum){
-      data.add("\t\t" + "p.setValueAtTime(" + ((float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps))) + ", [ " + particle[spriteNum].AEpath[frameNum].x + ", " + particle[spriteNum].AEpath[frameNum].y + "]);" + "\r");
+  
+     // smoothing algorithm by Golan Levin
+
+   float weight = 18;
+   float scaleNum  = 1.0 / (weight + 2);
+   PVector lower, upper, centerNum;
+
+     centerNum = new PVector(particle[spriteNum].AEpath[frameNum].x,particle[spriteNum].AEpath[frameNum].y);
+
+     if(applySmoothing && frameNum>smoothNum && frameNum<counterMax-smoothNum){
+       lower = new PVector(particle[spriteNum].AEpath[frameNum-smoothNum].x,particle[spriteNum].AEpath[frameNum-smoothNum].y);
+       upper = new PVector(particle[spriteNum].AEpath[frameNum+smoothNum].x,particle[spriteNum].AEpath[frameNum+smoothNum].y);
+       centerNum.x = (lower.x + weight*centerNum.x + upper.x)*scaleNum;
+       centerNum.y = (lower.y + weight*centerNum.y + upper.y)*scaleNum;
+     }
+     
+     if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
+       data.add("\t\t" + "p.setValueAtTime(" + ((float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps))) + ", [ " + centerNum.x + ", " + centerNum.y + "]);" + "\r");
+     }
 }
 
 void AEkeyRot(int spriteNum, int frameNum){
@@ -70,6 +78,8 @@ void AEkeysEnd() {
   data.add("}  //end script" + "\r");
   data.endSave("data/"+ aeFilePath + "/" + aeFileName + "." + aeFileType);
 }
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 boolean hitDetect(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
   w1 /= 2;

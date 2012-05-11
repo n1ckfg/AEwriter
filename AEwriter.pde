@@ -3,11 +3,11 @@ import processing.opengl.*;
 //**************************
 int fps = 24;
 float durationFrames = 5 * fps;
-int numParticles = 10;
+int numParticles = 50;
 boolean motionBlur = true;
 boolean applyEffects = false;
-boolean applySmoothing = false; //this doesn't really work right now
-float smoothNum = 250;
+boolean applySmoothing = true;
+int smoothNum = 6;
 //**************************
 
 //this sketch
