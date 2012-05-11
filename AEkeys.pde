@@ -14,8 +14,13 @@ void AEkeysMain() {
 
     for (int j=0;j<counterMax;j++) {
       AEkeyPos(i,j);
+      AEkeyRot(i,j);
     }
 }
+}
+
+float AEkeyTime(int frameNum){
+  return (float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps));
 }
 
 void AEkeyPos(int spriteNum, int frameNum){
@@ -36,12 +41,26 @@ void AEkeyPos(int spriteNum, int frameNum){
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
-       data.add("\t\t" + "p.setValueAtTime(" + ((float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps))) + ", [ " + centerNum.x + ", " + centerNum.y + "]);" + "\r");
+       data.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + "]);" + "\r");
      }
 }
 
 void AEkeyRot(int spriteNum, int frameNum){
-      data.add("\t\t" + "r.setValueAtTime(" + ((float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps))) + ", " + particle[spriteNum].AErot[frameNum] +");" + "\r");
+   float weight = 18;
+   float scaleNum  = 1.0 / (weight + 2);
+   float lower, upper, centerNum;
+
+     centerNum = particle[spriteNum].AErot[frameNum];
+
+     if(applySmoothing && frameNum>smoothNum && frameNum<counterMax-smoothNum){
+       lower = particle[spriteNum].AErot[frameNum-smoothNum];
+       upper = particle[spriteNum].AErot[frameNum+smoothNum];
+       centerNum = (lower + weight*centerNum + upper)*scaleNum;
+     }
+     
+     if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
+      data.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
+     }
 }
 
 void AEeffects(){

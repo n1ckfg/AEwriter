@@ -2,8 +2,8 @@ import processing.opengl.*;
 
 //**************************
 int fps = 24;
-float durationFrames = 5 * fps;
-int numParticles = 50;
+float durationFrames = 10 * fps;
+int numParticles = 100;
 boolean motionBlur = true;
 boolean applyEffects = false;
 boolean applySmoothing = true;
