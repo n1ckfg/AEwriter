@@ -9,10 +9,7 @@ boolean applyEffects = false;
 boolean applySmoothing = true;
 int smoothNum = 6;
 boolean tracePath = true;
-<<<<<<< HEAD
-=======
-String platform = "Maya";  //choices are "After Effects", "Maya"
->>>>>>> Added rudimentary Maya support!
+String platform = "After Effects";  //choices are "After Effects", "Maya"
 //**************************
 
 //this sketch
@@ -23,13 +20,6 @@ int sH = 360;
 int dW = 1920;
 int dH = 1080;
 
-<<<<<<< HEAD
-String aeFileName = "AEscript";
-String aeFilePath = "";
-String aeFileType = "jsx";
-
-=======
->>>>>>> Added rudimentary Maya support!
 Data data;
 int counter=0;
 int counterMax = int(durationFrames);
@@ -77,6 +67,35 @@ void draw() {
     exit();
   }
 }
+
+
+void chooseKeysBegin(String s) {
+  if (s=="After Effects") {
+    AEkeysBegin();
+  } 
+  else if (s=="Maya") {
+    mayaKeysBegin();
+  }
+}
+
+void chooseKeysMain(String s) {
+  if (s=="After Effects") {
+    AEkeysMain();
+  } 
+  else if (s=="Maya") {
+    mayaKeysMain();
+  }
+}
+
+void chooseKeysEnd(String s) {
+  if (s=="After Effects") {
+    AEkeysEnd();
+  } 
+  else if (s=="Maya") {
+    mayaKeysEnd();
+  }
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
