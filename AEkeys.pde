@@ -1,3 +1,7 @@
+String aeFileName = "AEscript";
+String aeFilePath = "";
+String aeFileType = "jsx";
+
 void AEkeysMain() {
   for (int i=0;i<numParticles;i++) {
     data.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
@@ -16,6 +20,7 @@ void AEkeysMain() {
       AEkeyPos(i,j);
       AEkeyRot(i,j);
     }
+<<<<<<< HEAD
 }
 }
 
@@ -61,8 +66,58 @@ void AEkeyRot(int spriteNum, int frameNum){
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
       data.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
      }
+=======
+>>>>>>> Added rudimentary Maya support!
+}
 }
 
+float AEkeyTime(int frameNum){
+  return (float(frameNum)/float(counterMax)) * (float(counterMax)/float(fps));
+}
+
+void AEkeyPos(int spriteNum, int frameNum){
+  
+     // smoothing algorithm by Golan Levin
+
+   float weight = 18;
+   float scaleNum  = 1.0 / (weight + 2);
+   PVector lower, upper, centerNum;
+
+     centerNum = new PVector(particle[spriteNum].AEpath[frameNum].x,particle[spriteNum].AEpath[frameNum].y);
+
+     if(applySmoothing && frameNum>smoothNum && frameNum<counterMax-smoothNum){
+       lower = new PVector(particle[spriteNum].AEpath[frameNum-smoothNum].x,particle[spriteNum].AEpath[frameNum-smoothNum].y);
+       upper = new PVector(particle[spriteNum].AEpath[frameNum+smoothNum].x,particle[spriteNum].AEpath[frameNum+smoothNum].y);
+       centerNum.x = (lower.x + weight*centerNum.x + upper.x)*scaleNum;
+       centerNum.y = (lower.y + weight*centerNum.y + upper.y)*scaleNum;
+     }
+     
+     if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
+       data.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + "]);" + "\r");
+     }
+}
+
+void AEkeyRot(int spriteNum, int frameNum){
+   float weight = 18;
+   float scaleNum  = 1.0 / (weight + 2);
+   float lower, upper, centerNum;
+
+<<<<<<< HEAD
+=======
+     centerNum = particle[spriteNum].AErot[frameNum];
+
+     if(applySmoothing && frameNum>smoothNum && frameNum<counterMax-smoothNum){
+       lower = particle[spriteNum].AErot[frameNum-smoothNum];
+       upper = particle[spriteNum].AErot[frameNum+smoothNum];
+       centerNum = (lower + weight*centerNum + upper)*scaleNum;
+     }
+     
+     if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
+      data.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
+     }
+}
+
+>>>>>>> Added rudimentary Maya support!
 void AEeffects(){
      data.add("\t" + "var myEffect = solid.property(\"Effects\").addProperty(\"Fast Blur\")(\"Blurriness\").setValue(61);");
 }
@@ -98,6 +153,7 @@ void AEkeysEnd() {
   data.endSave("data/"+ aeFilePath + "/" + aeFileName + "." + aeFileType);
 }
 
+<<<<<<< HEAD
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 boolean hitDetect(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
@@ -112,3 +168,6 @@ boolean hitDetect(float x1, float y1, float w1, float h1, float x2, float y2, fl
     return false;
   }
 }
+=======
+
+>>>>>>> Added rudimentary Maya support!

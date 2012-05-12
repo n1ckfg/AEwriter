@@ -9,6 +9,10 @@ boolean applyEffects = false;
 boolean applySmoothing = true;
 int smoothNum = 6;
 boolean tracePath = true;
+<<<<<<< HEAD
+=======
+String platform = "Maya";  //choices are "After Effects", "Maya"
+>>>>>>> Added rudimentary Maya support!
 //**************************
 
 //this sketch
@@ -19,10 +23,13 @@ int sH = 360;
 int dW = 1920;
 int dH = 1080;
 
+<<<<<<< HEAD
 String aeFileName = "AEscript";
 String aeFilePath = "";
 String aeFileType = "jsx";
 
+=======
+>>>>>>> Added rudimentary Maya support!
 Data data;
 int counter=0;
 int counterMax = int(durationFrames);
@@ -37,7 +44,7 @@ void setup() {
   for (int i=0;i<numParticles;i++) {
     particle[i] = new Boid(new PVector(random(sW), random(sH)), 10.0, 0.5); //orig 4.0, 0.1
   }
-  AEkeysBegin();
+  chooseKeysBegin(platform);
 }
 
 void draw() {
@@ -65,9 +72,23 @@ void draw() {
     println(counter + " / " + counterMax);
   } 
   else {
-    AEkeysMain();
-    AEkeysEnd();   
+    chooseKeysMain(platform);
+    chooseKeysEnd(platform);   
     exit();
   }
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+boolean hitDetect(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
+  w1 /= 2;
+  h1 /= 2;
+  w2 /= 2;
+  h2 /= 2; 
+  if(x1 + w1 >= x2 - w2 && x1 - w1 <= x2 + w2 && y1 + h1 >= y2 - h2 && y1 - h1 <= y2 + h2) {
+    return true;
+  } 
+  else {
+    return false;
+  }
+}
