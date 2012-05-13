@@ -9,7 +9,7 @@ boolean applyEffects = false;
 boolean applySmoothing = true;
 int smoothNum = 6;
 boolean tracePath = true;
-String platform = "After Effects";  //choices are "After Effects", "Maya"
+String[] platform = { "After Effects","Maya" };
 //**************************
 
 //this sketch
@@ -26,6 +26,7 @@ int counterMax = int(durationFrames);
 Boid[] particle = new Boid[numParticles];
 ArrayList traceController;
 color traceColor = color(255,0,0,50);
+float tempZ; // used by AEkeys, etc. until Boids works in 3D
 
 void setup() {
   size(sW, sH, OPENGL);
@@ -34,7 +35,6 @@ void setup() {
   for (int i=0;i<numParticles;i++) {
     particle[i] = new Boid(new PVector(random(sW), random(sH)), 10.0, 0.5); //orig 4.0, 0.1
   }
-  chooseKeysBegin(platform);
 }
 
 void draw() {
@@ -62,8 +62,11 @@ void draw() {
     println(counter + " / " + counterMax);
   } 
   else {
-    chooseKeysMain(platform);
-    chooseKeysEnd(platform);   
+    for(int k=0;k<platform.length;k++){
+    chooseKeysBegin(platform[k]);
+    chooseKeysMain(platform[k]);
+    chooseKeysEnd(platform[k]);
+    }   
     exit();
   }
 }

@@ -5,6 +5,7 @@ String aeFileType = "jsx";
 void AEkeysMain() {
   for (int i=0;i<numParticles;i++) {
     data.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
+    data.add("\t" + "solid.threeDLayer = true;" + "\r");
     if(motionBlur){
       data.add("\t" + "solid.motionBlur = true;" + "\r");
     }
@@ -16,6 +17,7 @@ void AEkeysMain() {
     data.add("\t" + "var r = solid.property(\"rotation\");" + "\r");
     data.add("\r");
 
+    tempZ = random(-1000,1000); //temporary fix until Boids work in 3D
     for (int j=0;j<counterMax;j++) {
       AEkeyPos(i,j);
       AEkeyRot(i,j);
@@ -45,7 +47,7 @@ void AEkeyPos(int spriteNum, int frameNum){
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
-       data.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + "]);" + "\r");
+       data.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + ", " + tempZ + "]);" + "\r");
      }
 }
 

@@ -5,6 +5,8 @@ String mayaFileType = "py";
 void mayaKeysMain() {
   for (int i=0;i<numParticles;i++) {
     data.add("polyCube()" + "\r");
+    
+    tempZ = random(-10,10); //temporary fix until Boids work in 3D
     for (int j=0;j<counterMax;j++) {
       mayaKeyPos(i,j);
     }
@@ -30,7 +32,7 @@ void mayaKeyPos(int spriteNum, int frameNum){
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
        data.add("currentTime("+frameNum+")"+"\r");
-       data.add("move(" + (centerNum.x/100) + ", " + (centerNum.y/100) + "," + 0 + ")" + "\r");
+       data.add("move(" + (centerNum.x/100) + ", " + (centerNum.y/100) + "," + tempZ + ")" + "\r");
        data.add("setKeyframe()" + "\r");
      }
 }
