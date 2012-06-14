@@ -3,12 +3,14 @@ String mayaFilePath = "";
 String mayaFileType = "py";
 
 void mayaKeysMain() {
+  mayaKeysBegin();
   for (int i=0;i<numParticles;i++) {
     dataMaya.add("polyCube()" + "\r");
     for (int j=0;j<counterMax;j++) {
       mayaKeyPos(i,j);
     }
 }
+    mayaKeysEnd();
 }
 
 void mayaKeyPos(int spriteNum, int frameNum){

@@ -26,6 +26,11 @@ Boid[] particle = new Boid[numParticles];
 ArrayList traceController;
 color traceColor = color(255,0,0,50);
 
+void writeAllKeys(){
+    AEkeysMain();  // After Effects, JavaScript
+    mayaKeysMain();  // Maya, Python
+}
+
 void setup() {
   size(sW, sH, OPENGL);
   frameRate(fps);
@@ -33,8 +38,6 @@ void setup() {
   for (int i=0;i<numParticles;i++) {
     particle[i] = new Boid(new PVector(random(sW), random(sH)), 10.0, 0.5); //orig 4.0, 0.1
   }
-  AEkeysBegin();
-  mayaKeysBegin();
 }
 
 void draw() {
@@ -62,10 +65,7 @@ void draw() {
     println(counter + " / " + counterMax);
   } 
   else {
-    AEkeysMain();
-    AEkeysEnd();   
-    mayaKeysMain();
-    mayaKeysEnd();
+    writeAllKeys();
     exit();
   }
 }

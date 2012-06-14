@@ -3,6 +3,7 @@ String aeFilePath = "";
 String aeFileType = "jsx";
 
 void AEkeysMain() {
+  AEkeysBegin();
   for (int i=0;i<numParticles;i++) {
     dataAE.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
     if(motionBlur){
@@ -21,6 +22,7 @@ void AEkeysMain() {
       AEkeyRot(i,j);
     }
 }
+    AEkeysEnd();   
 }
 
 float AEkeyTime(int frameNum){
