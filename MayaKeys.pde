@@ -4,9 +4,7 @@ String mayaFileType = "py";
 
 void mayaKeysMain() {
   for (int i=0;i<numParticles;i++) {
-    data.add("polyCube()" + "\r");
-    
-    tempZ = random(-10,10); //temporary fix until Boids work in 3D
+    dataMaya.add("polyCube()" + "\r");
     for (int j=0;j<counterMax;j++) {
       mayaKeyPos(i,j);
     }
@@ -31,9 +29,9 @@ void mayaKeyPos(int spriteNum, int frameNum){
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
-       data.add("currentTime("+frameNum+")"+"\r");
-       data.add("move(" + (centerNum.x/100) + ", " + (centerNum.y/100) + "," + tempZ + ")" + "\r");
-       data.add("setKeyframe()" + "\r");
+       dataMaya.add("currentTime("+frameNum+")"+"\r");
+       dataMaya.add("move(" + (centerNum.x/100) + ", " + (centerNum.y/100) + "," + 0 + ")" + "\r");
+       dataMaya.add("setKeyframe()" + "\r");
      }
 }
 
@@ -52,7 +50,7 @@ void mayaKeyRot(int spriteNum, int frameNum){
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
-      data.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
+      dataMaya.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
      }
      */
 }
@@ -60,22 +58,22 @@ void mayaKeyRot(int spriteNum, int frameNum){
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void mayaKeysBegin() {
-  data = new Data();
-  data.beginSave();
-  data.add("from maya.cmds import *" + "\r");
-  data.add("from random import uniform as rnd" + "\r");
-  data.add("#select(all=True)" + "\r");
-  data.add("#delete()" + "\r");
-  data.add("playbackOptions(minTime=\"0\", maxTime=\"" + counterMax + "\")" + "\r");
-  data.add("#grav = gravity()" + "\r");  
-  data.add("\r");  
+  dataMaya = new Data();
+  dataMaya.beginSave();
+  dataMaya.add("from maya.cmds import *" + "\r");
+  dataMaya.add("from random import uniform as rnd" + "\r");
+  dataMaya.add("#select(all=True)" + "\r");
+  dataMaya.add("#delete()" + "\r");
+  dataMaya.add("playbackOptions(minTime=\"0\", maxTime=\"" + counterMax + "\")" + "\r");
+  dataMaya.add("#grav = gravity()" + "\r");  
+  dataMaya.add("\r");  
 }
 
 void mayaKeysEnd() {
-  data.add("#floor = polyPlane(w=30,h=30)" + "\r");
-  data.add("#rigidBody(passive=True)" + "\r");
-  data.add("#move(0,0,0)" + "\r");
-  data.endSave("data/"+ mayaFilePath + "/" + mayaFileName + "." + mayaFileType);
+  dataMaya.add("#floor = polyPlane(w=30,h=30)" + "\r");
+  dataMaya.add("#rigidBody(passive=True)" + "\r");
+  dataMaya.add("#move(0,0,0)" + "\r");
+  dataMaya.endSave("data"+ mayaFilePath + "/" + mayaFileName + "." + mayaFileType);
 }
 
 

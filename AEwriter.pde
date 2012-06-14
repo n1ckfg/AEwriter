@@ -9,7 +9,6 @@ boolean applyEffects = false;
 boolean applySmoothing = true;
 int smoothNum = 6;
 boolean tracePath = true;
-String[] platform = { "After Effects","Maya" };
 //**************************
 
 //this sketch
@@ -20,13 +19,12 @@ int sH = 360;
 int dW = 1920;
 int dH = 1080;
 
-Data data;
+Data dataAE, dataMaya;
 int counter=0;
 int counterMax = int(durationFrames);
 Boid[] particle = new Boid[numParticles];
 ArrayList traceController;
 color traceColor = color(255,0,0,50);
-float tempZ; // used by AEkeys, etc. until Boids works in 3D
 
 void setup() {
   size(sW, sH, OPENGL);
@@ -35,6 +33,8 @@ void setup() {
   for (int i=0;i<numParticles;i++) {
     particle[i] = new Boid(new PVector(random(sW), random(sH)), 10.0, 0.5); //orig 4.0, 0.1
   }
+  AEkeysBegin();
+  mayaKeysBegin();
 }
 
 void draw() {
@@ -62,43 +62,13 @@ void draw() {
     println(counter + " / " + counterMax);
   } 
   else {
-    for(int k=0;k<platform.length;k++){
-    chooseKeysBegin(platform[k]);
-    chooseKeysMain(platform[k]);
-    chooseKeysEnd(platform[k]);
-    }   
+    AEkeysMain();
+    AEkeysEnd();   
+    mayaKeysMain();
+    mayaKeysEnd();
     exit();
   }
 }
-
-
-void chooseKeysBegin(String s) {
-  if (s=="After Effects") {
-    AEkeysBegin();
-  } 
-  else if (s=="Maya") {
-    mayaKeysBegin();
-  }
-}
-
-void chooseKeysMain(String s) {
-  if (s=="After Effects") {
-    AEkeysMain();
-  } 
-  else if (s=="Maya") {
-    mayaKeysMain();
-  }
-}
-
-void chooseKeysEnd(String s) {
-  if (s=="After Effects") {
-    AEkeysEnd();
-  } 
-  else if (s=="Maya") {
-    mayaKeysEnd();
-  }
-}
-
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

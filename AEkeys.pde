@@ -4,20 +4,18 @@ String aeFileType = "jsx";
 
 void AEkeysMain() {
   for (int i=0;i<numParticles;i++) {
-    data.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
-    data.add("\t" + "solid.threeDLayer = true;" + "\r");
+    dataAE.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
     if(motionBlur){
-      data.add("\t" + "solid.motionBlur = true;" + "\r");
+      dataAE.add("\t" + "solid.motionBlur = true;" + "\r");
     }
     if(applyEffects){
       AEeffects();
     }
-    data.add("\r");
-    data.add("\t" + "var p = solid.property(\"position\");" + "\r");
-    data.add("\t" + "var r = solid.property(\"rotation\");" + "\r");
-    data.add("\r");
+    dataAE.add("\r");
+    dataAE.add("\t" + "var p = solid.property(\"position\");" + "\r");
+    dataAE.add("\t" + "var r = solid.property(\"rotation\");" + "\r");
+    dataAE.add("\r");
 
-    tempZ = random(-1000,1000); //temporary fix until Boids work in 3D
     for (int j=0;j<counterMax;j++) {
       AEkeyPos(i,j);
       AEkeyRot(i,j);
@@ -47,7 +45,7 @@ void AEkeyPos(int spriteNum, int frameNum){
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
-       data.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + ", " + tempZ + "]);" + "\r");
+       dataAE.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + "]);" + "\r");
      }
 }
 
@@ -65,43 +63,43 @@ void AEkeyRot(int spriteNum, int frameNum){
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
-      data.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
+      dataAE.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
      }
 }
 
 void AEeffects(){
-     data.add("\t" + "var myEffect = solid.property(\"Effects\").addProperty(\"Fast Blur\")(\"Blurriness\").setValue(61);");
+     dataAE.add("\t" + "var myEffect = solid.property(\"Effects\").addProperty(\"Fast Blur\")(\"Blurriness\").setValue(61);");
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void AEkeysBegin() {
-  data = new Data();
-  data.beginSave();
-  data.add("{  //start script" + "\r");
-  data.add("\t" + "app.beginUndoGroup(\"foo\");" + "\r");
-  data.add("\r");
-  data.add("\t" + "// create project if necessary" + "\r");
-  data.add("\t" + "var proj = app.project;" + "\r");
-  data.add("\t" + "if(!proj) proj = app.newProject();" + "\r");
-  data.add("\r");
-  data.add("\t" + "// create new comp named 'my comp'" + "\r");
-  data.add("\t" + "var compW = " + dW + "; // comp width" + "\r");
-  data.add("\t" + "var compH = " + dH + "; // comp height" + "\r");
-  data.add("\t" + "var compL = " + (counterMax/fps) + ";  // comp length (seconds)" + "\r");
-  data.add("\t" + "var compRate = " + fps + "; // comp frame rate" + "\r");
-  data.add("\t" + "var compBG = [0/255,0/255,0/255] // comp background color" + "\r");
-  data.add("\t" + "var myItemCollection = app.project.items;" + "\r");
-  data.add("\t" + "var myComp = myItemCollection.addComp('my comp',compW,compH,1,compL,compRate);" + "\r");
-  data.add("\t" + "myComp.bgColor = compBG;" + "\r");
-  data.add("\r");  
+  dataAE = new Data();
+  dataAE.beginSave();
+  dataAE.add("{  //start script" + "\r");
+  dataAE.add("\t" + "app.beginUndoGroup(\"foo\");" + "\r");
+  dataAE.add("\r");
+  dataAE.add("\t" + "// create project if necessary" + "\r");
+  dataAE.add("\t" + "var proj = app.project;" + "\r");
+  dataAE.add("\t" + "if(!proj) proj = app.newProject();" + "\r");
+  dataAE.add("\r");
+  dataAE.add("\t" + "// create new comp named 'my comp'" + "\r");
+  dataAE.add("\t" + "var compW = " + dW + "; // comp width" + "\r");
+  dataAE.add("\t" + "var compH = " + dH + "; // comp height" + "\r");
+  dataAE.add("\t" + "var compL = " + (counterMax/fps) + ";  // comp length (seconds)" + "\r");
+  dataAE.add("\t" + "var compRate = " + fps + "; // comp frame rate" + "\r");
+  dataAE.add("\t" + "var compBG = [0/255,0/255,0/255] // comp background color" + "\r");
+  dataAE.add("\t" + "var myItemCollection = app.project.items;" + "\r");
+  dataAE.add("\t" + "var myComp = myItemCollection.addComp('my comp',compW,compH,1,compL,compRate);" + "\r");
+  dataAE.add("\t" + "myComp.bgColor = compBG;" + "\r");
+  dataAE.add("\r");  
 }
 
 void AEkeysEnd() {
-  data.add("\r");
-  data.add("\t" + "app.endUndoGroup();" + "\r");
-  data.add("}  //end script" + "\r");
-  data.endSave("data/"+ aeFilePath + "/" + aeFileName + "." + aeFileType);
+  dataAE.add("\r");
+  dataAE.add("\t" + "app.endUndoGroup();" + "\r");
+  dataAE.add("}  //end script" + "\r");
+  dataAE.endSave("data"+ aeFilePath + "/" + aeFileName + "." + aeFileType);
 }
 
 
