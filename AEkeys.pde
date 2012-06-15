@@ -1,5 +1,5 @@
 String aeFileName = "AEscript";
-String aeFilePath = masterFilePath;
+String aeFilePath = scriptsFilePath;
 String aeFileType = "jsx";
 
 void AEkeysMain() {

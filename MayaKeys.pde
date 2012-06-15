@@ -1,5 +1,5 @@
 String mayaFileName = "mayaScript";
-String mayaFilePath = masterFilePath;
+String mayaFilePath = scriptsFilePath;
 String mayaFileType = "py";
 
 void mayaKeysMain() {
