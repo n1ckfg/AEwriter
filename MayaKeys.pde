@@ -1,5 +1,5 @@
 String mayaFileName = "mayaScript";
-String mayaFilePath = "";
+String mayaFilePath = masterFilePath;
 String mayaFileType = "py";
 
 void mayaKeysMain() {
@@ -75,7 +75,7 @@ void mayaKeysEnd() {
   dataMaya.add("#floor = polyPlane(w=30,h=30)" + "\r");
   dataMaya.add("#rigidBody(passive=True)" + "\r");
   dataMaya.add("#move(0,0,0)" + "\r");
-  dataMaya.endSave("data"+ mayaFilePath + "/" + mayaFileName + "." + mayaFileType);
+  dataMaya.endSave(mayaFilePath + "/" + mayaFileName + "." + mayaFileType);
 }
 
 

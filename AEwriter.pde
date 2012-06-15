@@ -9,6 +9,7 @@ boolean applyEffects = false;
 boolean applySmoothing = true;
 int smoothNum = 6;
 boolean tracePath = true;
+String masterFilePath = "scripts";
 //**************************
 
 //this sketch
