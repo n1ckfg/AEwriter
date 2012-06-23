@@ -7,7 +7,11 @@ int numParticles = 100;
 boolean motionBlur = true;
 boolean applyEffects = false;
 boolean applySmoothing = true;
+//smoothing
 int smoothNum = 6;
+float weight = 18;
+float scaleNum  = 1.0 / (weight + 2);
+//---
 boolean tracePath = true;
 String scriptsFilePath = "scripts";
 //**************************

@@ -17,8 +17,6 @@ void mayaKeyPos(int spriteNum, int frameNum){
   
      // smoothing algorithm by Golan Levin
 
-   float weight = 18;
-   float scaleNum  = 1.0 / (weight + 2);
    PVector lower, upper, centerNum;
 
      centerNum = new PVector(particle[spriteNum].AEpath[frameNum].x,particle[spriteNum].AEpath[frameNum].y);
@@ -39,8 +37,7 @@ void mayaKeyPos(int spriteNum, int frameNum){
 
 void mayaKeyRot(int spriteNum, int frameNum){
    /*
-   float weight = 18;
-   float scaleNum  = 1.0 / (weight + 2);
+
    float lower, upper, centerNum;
 
      centerNum = particle[spriteNum].AErot[frameNum];
