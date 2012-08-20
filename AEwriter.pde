@@ -2,7 +2,7 @@ import processing.opengl.*;
 
 //**************************
 int fps = 24;
-float durationFrames = 10 * fps;
+float durationTimeInSec = 20;
 int numParticles = 100;
 boolean motionBlur = true;
 boolean applyEffects = false;
@@ -26,17 +26,26 @@ int dH = 1080;
 
 Data dataAE, dataMaya;
 int counter=0;
-int counterMax = int(durationFrames);
+int counterMax = int(durationTimeInSec * fps);
 Boid[] particle = new Boid[numParticles];
 ArrayList traceController;
 color traceColor = color(255,0,0,50);
+boolean writeAE = true;
+boolean writeMaya = true;
 
 void writeAllKeys(){
-    AEkeysMain();  // After Effects, JavaScript
-    mayaKeysMain();  // Maya, Python
+    if(writeAE) AEkeysMain();  // After Effects, JavaScript
+    if(writeMaya) mayaKeysMain();  // Maya, Python
+}
+
+void initSettings(){
+  Settings settings = new Settings("settings.txt");
+  counterMax = int(durationTimeInSec * fps);
+  particle = new Boid[numParticles];
 }
 
 void setup() {
+  initSettings();
   size(sW, sH, OPENGL);
   frameRate(fps);
   traceController = new ArrayList();
