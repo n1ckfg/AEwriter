@@ -1,3 +1,0 @@
- -Xms64m -Xmx1024m
-AEwriter
-AEwriter.jar,core.jar,gluegen-rt.jar,jogl.jar,opengl.jar
