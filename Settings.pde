@@ -39,6 +39,10 @@ class Settings {
     return boolean(_s);
   }
 
+  String setString(String _s) {
+    return ""+(_s);
+  }
+  
   color setColor(String _s) {
     color endColor = color(0);
     int commaCounter=0;
