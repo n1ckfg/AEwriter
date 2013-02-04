@@ -1,35 +1,47 @@
-writeAE
+Receive OSC Active
 true
 
-writeMaya
+OSC Receive Port
+7110
+
+Write AE Script
 true
 
-sW
+Write Maya Script
+true
+
+Stage Width
 640
 
-sH
+Stage Height
 360
 
-dW
+Stage Depth
+400
+
+Destination AE Comp Width
 1920
 
-dH
+Destination AE Comp Height
 1080
 
-fps
+Destination AE Comp Depth
+1000
+
+Framerate
 24
 
-numParticles
+Number of Particles
 100
 
-motionBlur
+Use AE Motion Blur
 true
 
-applyEffects
+Use Borders
 false
 
-smoothNum
-6
+Apply AE Effects
+false
 
-traceColor
-(255,255,0,50)
+Smoothing Amount
+6

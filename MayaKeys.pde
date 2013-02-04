@@ -26,11 +26,12 @@ void mayaKeyPos(int spriteNum, int frameNum){
        upper = (PVector) particle[spriteNum].AEpath.get(frameNum+smoothNum);
        centerNum.x = (lower.x + weight*centerNum.x + upper.x)*scaleNum;
        centerNum.y = (lower.y + weight*centerNum.y + upper.y)*scaleNum;
+       centerNum.z = (lower.z + weight*centerNum.z + upper.z)*scaleNum;
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counter-1){
        dataMaya.add("currentTime("+frameNum+")"+"\r");
-       dataMaya.add("move(" + (centerNum.x/100) + ", " + (centerNum.y/100) + "," + 0 + ")" + "\r");
+       dataMaya.add("move(" + (centerNum.x/100) + ", " + (centerNum.y/100) + "," + (centerNum.z/100) + ")" + "\r");
        dataMaya.add("setKeyframe()" + "\r");
      }
 }

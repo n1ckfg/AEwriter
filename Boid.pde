@@ -19,8 +19,8 @@ class Boid {
   float theta; //rotation
 
   Boid(PVector l, float ms, float mf) {
-    acc = new PVector(0, 0);
-    vel = new PVector(0, 0);
+    acc = new PVector(0, 0, 0);
+    vel = new PVector(0, 0, 0);
     loc = l.get();
     r = 3.0;
     maxspeed = ms;
@@ -28,21 +28,14 @@ class Boid {
   }
 
   void run() {
-    seek(new PVector(mouseX, mouseY));
     update();
-    //borders();
-    render();
-    //this is needed to record AE keyframe data
-    if (record) {
-      PVector v1 = new PVector((loc.x/sW)*dW, (loc.y/sH)*dH);
-      float v2 = degrees(theta);
-      AEpath.add(v1);
-      AErot.add(v2);
-    }
+    draw();
   }
 
   // Method to update location
   void update() {
+    seek(tracker.p);
+    //~~~~~~~~~~~~~~~~~
     // Update velocity
     vel.add(acc);
     // Limit speed
@@ -50,6 +43,16 @@ class Boid {
     loc.add(vel);
     // Reset accelertion to 0 each cycle
     acc.mult(0);
+    //~~~~~~~~~~~~~~~~~
+    if(borders) bordersHandler();
+    //~~~~~~~~~~~~~~~~~
+    //this is needed to record AE keyframe data
+    if (record) {
+      PVector v1 = new PVector((loc.x/sW)*dW, (loc.y/sH)*dH, (loc.z/sD)*dD);
+      float v2 = degrees(theta);
+      AEpath.add(v1);
+      AErot.add(v2);
+    }
   }
 
   void seek(PVector target) {
@@ -78,18 +81,19 @@ class Boid {
       steer.limit(maxforce);  // Limit to maximum steering force
     } 
     else {
-      steer = new PVector(0, 0);
+      steer = new PVector(0, 0, 0);
     }
     return steer;
   }
 
-  void render() {
+  void draw() {
     // Draw a triangle rotated in the direction of velocity
     theta = vel.heading2D() + radians(90);
     fill(175);
+    strokeWeight(1);
     stroke(0);
     pushMatrix();
-    translate(loc.x, loc.y);
+    translate(loc.x, loc.y, loc.z);
     rotate(theta);
     beginShape(TRIANGLES);
     vertex(0, -r*2);
@@ -100,7 +104,7 @@ class Boid {
   }
 
   // Wraparound
-  void borders() {
+  void bordersHandler() {
     if (loc.x < -r) loc.x = width+r;
     if (loc.y < -r) loc.y = height+r;
     if (loc.x > width+r) loc.x = -r;

@@ -6,6 +6,7 @@ void AEkeysMain() {
   AEkeysBegin();
   for (int i=0;i<numParticles;i++) {
     dataAE.add("\t" + "var solid = myComp.layers.addSolid([1.0, 1.0, 0], \"my square\", 50, 50, 1);" + "\r");
+    dataAE.add("\t" + "solid.threeDLayer = true;" + "\r");
     if(motionBlur){
       dataAE.add("\t" + "solid.motionBlur = true;" + "\r");
     }
@@ -41,10 +42,11 @@ void AEkeyPos(int spriteNum, int frameNum){
        upper = (PVector) particle[spriteNum].AEpath.get(frameNum+smoothNum);
        centerNum.x = (lower.x + weight*centerNum.x + upper.x)*scaleNum;
        centerNum.y = (lower.y + weight*centerNum.y + upper.y)*scaleNum;
+       centerNum.z = (lower.z + weight*centerNum.z + upper.z)*scaleNum;
      }
      
      if(frameNum%smoothNum==0||frameNum==0||frameNum==counter-1){
-       dataAE.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + "]);" + "\r");
+       dataAE.add("\t\t" + "p.setValueAtTime(" + AEkeyTime(frameNum) + ", [ " + centerNum.x + ", " + centerNum.y + ", " + centerNum.z + "]);" + "\r");
      }
 }
 

@@ -7,19 +7,23 @@ class Settings {
       settings = new Data();
       settings.load(_s);
       for (int i=0;i<settings.data.length;i++) {
-        if (settings.data[i].equals("writeAE")) writeAE = setBoolean(settings.data[i+1]);
-        if (settings.data[i].equals("writeMaya")) writeMaya = setBoolean(settings.data[i+1]);
-        if (settings.data[i].equals("sW")) sW = setInt(settings.data[i+1]);
-        if (settings.data[i].equals("sH")) sH = setInt(settings.data[i+1]);
-        if (settings.data[i].equals("dW")) dW = setInt(settings.data[i+1]);
-        if (settings.data[i].equals("dH")) dH = setInt(settings.data[i+1]);
-        if (settings.data[i].equals("fps")) fps = setInt(settings.data[i+1]);
-        //if (settings.data[i].equals("durationTimeInSec")) durationTimeInSec = setFloat(settings.data[i+1]);
-        if (settings.data[i].equals("numParticles")) numParticles = setInt(settings.data[i+1]);
-        if (settings.data[i].equals("motionBlur")) motionBlur = setBoolean(settings.data[i+1]);
-        if (settings.data[i].equals("applyEffects")) applyEffects = setBoolean(settings.data[i+1]);
-        if (settings.data[i].equals("smoothNum")) smoothNum = setInt(settings.data[i+1]);
-        if (settings.data[i].equals("traceColor")) traceColor = setColor(settings.data[i+1]);
+        if (settings.data[i].equals("Receive OSC Active")) useOsc = setBoolean(settings.data[i+1]);
+        if (settings.data[i].equals("OSC Receive Port")) receivePort = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Write AE Script")) writeAE = setBoolean(settings.data[i+1]);
+        if (settings.data[i].equals("Write Maya Script")) writeMaya = setBoolean(settings.data[i+1]);
+        if (settings.data[i].equals("Stage Width")) sW = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Stage Height")) sH = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Stage Depth")) sD = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Destination AE Comp Width")) dW = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Destination AE Comp Height")) dH = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Destination AE Comp Depth")) dD = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Framerate")) fps = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Use Borders")) borders = setBoolean(settings.data[i+1]);
+        if (settings.data[i].equals("Number of Particles")) numParticles = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Use AE Motion Blur")) motionBlur = setBoolean(settings.data[i+1]);
+        if (settings.data[i].equals("Apply AE Effects")) applyEffects = setBoolean(settings.data[i+1]);
+        if (settings.data[i].equals("Smoothing Amount")) smoothNum = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Particle Trace Color")) traceColor = setColor(settings.data[i+1]);
        }
     } 
     catch(Exception e) {
