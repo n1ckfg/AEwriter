@@ -14,7 +14,7 @@ class Settings {
         if (settings.data[i].equals("dW")) dW = setInt(settings.data[i+1]);
         if (settings.data[i].equals("dH")) dH = setInt(settings.data[i+1]);
         if (settings.data[i].equals("fps")) fps = setInt(settings.data[i+1]);
-        if (settings.data[i].equals("durationTimeInSec")) durationTimeInSec = setFloat(settings.data[i+1]);
+        //if (settings.data[i].equals("durationTimeInSec")) durationTimeInSec = setFloat(settings.data[i+1]);
         if (settings.data[i].equals("numParticles")) numParticles = setInt(settings.data[i+1]);
         if (settings.data[i].equals("motionBlur")) motionBlur = setBoolean(settings.data[i+1]);
         if (settings.data[i].equals("applyEffects")) applyEffects = setBoolean(settings.data[i+1]);

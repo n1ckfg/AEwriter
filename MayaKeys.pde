@@ -6,7 +6,7 @@ void mayaKeysMain() {
   mayaKeysBegin();
   for (int i=0;i<numParticles;i++) {
     dataMaya.add("polyCube()" + "\r");
-    for (int j=0;j<counterMax;j++) {
+    for (int j=0;j<counter;j++) {
       mayaKeyPos(i,j);
     }
 }
@@ -19,16 +19,16 @@ void mayaKeyPos(int spriteNum, int frameNum){
 
    PVector lower, upper, centerNum;
 
-     centerNum = new PVector(particle[spriteNum].AEpath[frameNum].x,particle[spriteNum].AEpath[frameNum].y);
+     centerNum = (PVector) particle[spriteNum].AEpath.get(frameNum);
 
-     if(applySmoothing && frameNum>smoothNum && frameNum<counterMax-smoothNum){
-       lower = new PVector(particle[spriteNum].AEpath[frameNum-smoothNum].x,particle[spriteNum].AEpath[frameNum-smoothNum].y);
-       upper = new PVector(particle[spriteNum].AEpath[frameNum+smoothNum].x,particle[spriteNum].AEpath[frameNum+smoothNum].y);
+     if(applySmoothing && frameNum>smoothNum && frameNum<counter-smoothNum){
+       lower = (PVector) particle[spriteNum].AEpath.get(frameNum-smoothNum);
+       upper = (PVector) particle[spriteNum].AEpath.get(frameNum+smoothNum);
        centerNum.x = (lower.x + weight*centerNum.x + upper.x)*scaleNum;
        centerNum.y = (lower.y + weight*centerNum.y + upper.y)*scaleNum;
      }
      
-     if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
+     if(frameNum%smoothNum==0||frameNum==0||frameNum==counter-1){
        dataMaya.add("currentTime("+frameNum+")"+"\r");
        dataMaya.add("move(" + (centerNum.x/100) + ", " + (centerNum.y/100) + "," + 0 + ")" + "\r");
        dataMaya.add("setKeyframe()" + "\r");
@@ -42,13 +42,13 @@ void mayaKeyRot(int spriteNum, int frameNum){
 
      centerNum = particle[spriteNum].AErot[frameNum];
 
-     if(applySmoothing && frameNum>smoothNum && frameNum<counterMax-smoothNum){
+     if(applySmoothing && frameNum>smoothNum && frameNum<counter-smoothNum){
        lower = particle[spriteNum].AErot[frameNum-smoothNum];
        upper = particle[spriteNum].AErot[frameNum+smoothNum];
        centerNum = (lower + weight*centerNum + upper)*scaleNum;
      }
      
-     if(frameNum%smoothNum==0||frameNum==0||frameNum==counterMax-1){
+     if(frameNum%smoothNum==0||frameNum==0||frameNum==counter-1){
       dataMaya.add("\t\t" + "r.setValueAtTime(" + AEkeyTime(frameNum) + ", " + centerNum +");" + "\r");
      }
      */
@@ -63,7 +63,7 @@ void mayaKeysBegin() {
   dataMaya.add("from random import uniform as rnd" + "\r");
   dataMaya.add("#select(all=True)" + "\r");
   dataMaya.add("#delete()" + "\r");
-  dataMaya.add("playbackOptions(minTime=\"0\", maxTime=\"" + counterMax + "\")" + "\r");
+  dataMaya.add("playbackOptions(minTime=\"0\", maxTime=\"" + counter + "\")" + "\r");
   dataMaya.add("#grav = gravity()" + "\r");  
   dataMaya.add("\r");  
 }

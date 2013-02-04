@@ -2,11 +2,13 @@ import processing.opengl.*;
 
 //**************************
 int fps = 24;
-float durationTimeInSec = 20;
+//float durationTimeInSec = 20;
 int numParticles = 100;
 boolean motionBlur = true;
 boolean applyEffects = false;
 boolean applySmoothing = true;
+boolean record = false;
+boolean firstRun = true;
 //smoothing
 int smoothNum = 6;
 float weight = 18;
@@ -26,7 +28,7 @@ int dH = 1080;
 
 Data dataAE, dataMaya;
 int counter=0;
-int counterMax = int(durationTimeInSec * fps);
+//int counterMax = int(durationTimeInSec * fps);
 Boid[] particle = new Boid[numParticles];
 ArrayList traceController;
 color traceColor = color(255,0,0,50);
@@ -40,7 +42,7 @@ void writeAllKeys(){
 
 void initSettings(){
   Settings settings = new Settings("settings.txt");
-  counterMax = int(durationTimeInSec * fps);
+  //counterMax = int(durationTimeInSec * fps);
   particle = new Boid[numParticles];
 }
 
@@ -55,7 +57,11 @@ void setup() {
 }
 
 void draw() {
-  background(0);
+  if(!record){
+    background(0);
+  }else{
+    background(100,0,0);
+  }
   if(tracePath){
   traceController.add(new PVector(mouseX, mouseY));
   strokeWeight(2);
@@ -74,11 +80,10 @@ void draw() {
     particle[i].run();
   }
 
-  if (counter<counterMax) {
+  if (record) {
     counter++;
-    println(counter + " / " + counterMax);
-  } 
-  else {
+    println("frames: " + counter + "   seconds: " + (counter/fps));
+  }else if (!record && !firstRun){
     writeAllKeys();
     exit();
   }

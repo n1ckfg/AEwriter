@@ -19,9 +19,6 @@ dH
 fps
 24
 
-durationTimeInSec
-10
-
 numParticles
 100
 
