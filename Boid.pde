@@ -13,6 +13,7 @@ class Boid {
   PVector loc;
   PVector vel;
   PVector acc;
+  PVector t;
   float r;
   float maxforce;    // Maximum steering force
   float maxspeed;    // Maximum speed
@@ -21,6 +22,7 @@ class Boid {
   Boid(PVector l, float ms, float mf) {
     acc = new PVector(0, 0, 0);
     vel = new PVector(0, 0, 0);
+    t = new PVector(random(sW), random(sH), random(sD));
     loc = l.get();
     r = 3.0;
     maxspeed = ms;
@@ -34,7 +36,7 @@ class Boid {
 
   // Method to update location
   void update() {
-    seek(tracker.p);
+    seek(t);
     //~~~~~~~~~~~~~~~~~
     // Update velocity
     vel.add(acc);
@@ -101,6 +103,22 @@ class Boid {
     vertex(r, r*2);
     endShape();
     popMatrix();
+    //draws the target if it's not the global one
+    /*
+    if(t != tracker.p){
+    pushMatrix();
+    noStroke();
+    fill(255,50);
+    translate(t.x,t.y,t.z);
+    ellipseMode(CENTER);
+    ellipse(0,0,2,2);
+    popMatrix();
+    noFill();
+    stroke(255,50);
+    strokeWeight(1);
+    line(t.x,t.y,t.z,loc.x,loc.y,loc.z);
+    }
+    */
   }
 
   // Wraparound

@@ -34,6 +34,9 @@ Framerate
 Number of Particles
 100
 
+Collision Range
+20
+
 Use AE Motion Blur
 true
 
