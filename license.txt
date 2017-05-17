@@ -1,7 +1,7 @@
 AEwriter was developed with support from:
    Canada Council for the Arts
    Eyebeam Art + Technology Center
-Copyright (c) 2012 Nick Fox-Gieg Animation 
+Copyright (c) 2012 Nick Fox-Gieg
 http://fox-gieg.com
 
 The MIT License <http://www.opensource.org/licenses/mit-license.php>
