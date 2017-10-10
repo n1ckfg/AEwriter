@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>AEwriter.js</title>
+        <link type="text/css" rel="stylesheet" href="./css/main.css">
+        <script type="text/javascript" src="./js/libraries/leap.min.js"></script>
+
+        <script type="text/javascript" src="./js/flocking/AEkeys.js"></script>
+        <script type="text/javascript" src="./js/flocking/AEwriter.js"></script>
+        <script type="text/javascript" src="./js/flocking/Boid.js"></script>
+        <script type="text/javascript" src="./js/flocking/Controls.js"></script>
+        <script type="text/javascript" src="./js/flocking/MayaKeys.js"></script>
+        <script type="text/javascript" src="./js/flocking/Tracker.js"></script>
+        
+        <script type="text/javascript" src="./js/main.js"></script>
+    </head>
+
+    <body>
+        <div id="bannercontainer">
+            <div id="topbanner">
+                <a id="topbanner_link" href="http://fox-gieg.com"><img src="./images/new-banner1.jpg"></a>
+            </div>
+            <div id="topbanner-divider"></div>
+        </div>
+        <!-- * -->
+        <div id="container">
+            <!--
+            <div id="credits">
+                <span>created at <a href="http://gaffta.org">GAFFTA</a> for</span><br>
+                <span style="font-size:1.2em;"><a href="http://www.gaffta.org/2013/02/24/tribeca-hacks-archives/">Tribeca Hacks: Archives</a></span><br>
+                &nbsp;&nbsp;*<a style="font-size:0.75em;" href="https://github.com/N1ckFG/AEwriterjs">[ source ]</a>
+            </div>
+            -->
+            <div id="navigation">
+                <a href="index.html"><div class="tile" id="tile1"></div></a>
+                <a href="pointer.html"><div class="tile" id="tile2"></div></a>
+            </div>
+
+            <p style="margin-top:1em;">
+            <center><span style="font-weight:bold;font-size:2em;font-style:italic;">AEwriter.js</span><br><a style="font-size:0.85em;" href="https://github.com/N1ckFG/AEwriterjs">[ source ]</a></center><br>
+
+            <i><b>Record a flocking animation</b>...then save it as a script for After Effects or Maya.<br>
+            (Tested in desktop Chrome and Firefox. Safari users must <a href="http://www.ikriz.nl/2011/08/23/enable-webgl-in-safari/">enable WebGL</a>.)
+            </i></p>
+            <canvas id="pjs" tabindex="1"></canvas>
+            <a href="#" id="button1">[ After Effects ]</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" id="button2">[ Maya ]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i>...&nbsp;SPACE to record &nbsp;|&nbsp; L to toggle Leap</i>
+        
+            <br><br><br>
+            <span><i>Example:</i></span>
+
+            <!-- **************** BEGIN FLASH OBJECT **************** -->
+            <!--
+            <div id="player"><video src="http://fox-gieg.com/patches/pjs/2013/aewriterjs/files/werner.mp4" preload="none" poster="http://fox-gieg.com/videos2/previews/static.jpg" width="640" height="360" controls="controls"><center><br><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player to see this video.</a><br><br></center></video></div> 
+
+            <script type="text/javascript">
+            var so = new SWFObject('http://fox-gieg.com/videos2/swf/player.swf','mpl','640','360','9','#000000');
+            so.addParam('allowscriptaccess','always');
+            so.addParam('allowfullscreen','true');
+            so.addParam('flashvars','&file=http://fox-gieg.com/patches/pjs/2013/aewriterjs/files/werner.mp4&image=http://fox-gieg.com/videos2/previews/static.jpg&backcolor=55567a&frontcolor=c0c1cc&lightcolor=eeeeee&controlbar=over&skin=http://fox-gieg.com/videos2/swf/overlay.swf');
+            so.write('player');
+            </script>
+            -->
+            <!-- **************** END FLASH OBJECT **************** -->
+            
+            <br><br>
+        </div>
+    </body>
+
+</html>

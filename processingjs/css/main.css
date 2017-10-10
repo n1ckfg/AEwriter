@@ -1,0 +1,121 @@
+body{
+	font-family:"Verdana",sans-serif;
+	font-size:15px;
+  color:black;
+  background:#eeeeff;
+  margin: 0px 0px 0px 0px;
+}
+
+#pjs{
+width:640px;
+height:360px;
+border:1px solid black;
+/*outline:none;*/
+}
+
+#container{
+width:640px;
+height:880px;
+position:relative;
+margin:auto;
+}
+
+#credits{
+  width:20em;
+  height:4em;
+  font-weight:bold;
+  z-index:4;
+  opacity:0.7;
+  /*border:1px solid red;*/
+  position:relative;
+  left:-10em;
+  top:0.75em;
+  transform:rotate(-10deg);
+  -ms-transform:rotate(-10deg); /* IE 9 */
+  -moz-transform:rotate(-10deg); /* Firefox */
+  -webkit-transform:rotate(-10deg); /* Safari and Chrome */
+  -o-transform:rotate(-10deg); /* Opera */
+  text-shadow: 1px -1px 1px #eeeeff;
+}
+
+#navigation{
+  width:50px;
+  height:200px;
+  font-weight:bold;
+  z-index:2;
+  border:1px solid red;
+  position:absolute;
+  left:650px;
+  top:118px;
+  padding:5px;
+  border-radius:3px;
+  -ms-border-radius:3px;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  -o-border-radius:3px;
+}
+
+.tile{
+  width:48px;
+  height:48px;
+  position:relative;
+  margin:auto;
+  opacity:0.75;
+  border:1px solid red;
+  border-radius:5px;
+  -ms-border-radius:5px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  -o-border-radius:5px;
+}
+
+.tile:hover{
+  opacity:1.0;
+}
+
+#tile1{
+  background:url("../images/flocking.gif");
+}
+
+#tile2{
+  background:url("../images/pointer.gif");
+}
+
+a{
+  color:#111199;
+  text-decoration:none;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+#topbanner {
+width:640px;
+height:63px;
+position:relative;
+margin:auto;
+}
+   
+#topbannertext{
+  width:640px;
+  height:1em;
+  text-align:center;
+  margin-top:-3px;
+  margin-bottom:3px;
+}
+
+#bannercontainer{
+  width:100%;
+  height:63px;
+  background:url("http://fox-gieg.com/rkhive/rk-images/banner_side2.gif");
+  text-align:center;
+}
+
+#topbanner-divider{
+  width:100%;
+  height:16px;
+  background:url("http://fox-gieg.com/rkhive/rk-images/banner_side.gif");
+  background-size:100% 100%;
+  opacity:0.2;
+}
