@@ -1,3 +1,5 @@
+"use strict";
+
 //~~~   1.  LEAP   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
 var fingers = {};
 var spheres = {};
@@ -62,13 +64,24 @@ function setup(){
 }
 
 function saveText1() {
-  var uriContent = "data:text/plain;charset=utf-8," + encodeURIComponent(obj1);
-  window.open(uriContent);
+  download("aewriter_" + Date.now() + ".jsx", obj1);
 }
 
 function saveText2() {
-  var uriContent = "data:text/plain;charset=utf-8," + encodeURIComponent(obj2);
-  window.open(uriContent);
+  download("aewriter_" + Date.now() + ".py", obj2);
 }
 
 window.onload = setup;
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
