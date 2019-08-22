@@ -108,14 +108,14 @@ margin:auto;
 #bannercontainer{
   width:100%;
   height:63px;
-  background:url("http://fox-gieg.com/rkhive/rk-images/banner_side2.gif");
+  background:url("https://fox-gieg.com/rkhive/rk-images/banner_side2.gif");
   text-align:center;
 }
 
 #topbanner-divider{
   width:100%;
   height:16px;
-  background:url("http://fox-gieg.com/rkhive/rk-images/banner_side.gif");
+  background:url("https://fox-gieg.com/rkhive/rk-images/banner_side.gif");
   background-size:100% 100%;
   opacity:0.2;
 }

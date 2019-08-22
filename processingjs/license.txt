@@ -4,7 +4,7 @@ AEwriterjs was developed with support from:
    Ontario Arts Council / Chalmers Family Fund
 
 Copyright (c) 2013 Nick Fox-Gieg
-http://fox-gieg.com
+https://fox-gieg.com
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
